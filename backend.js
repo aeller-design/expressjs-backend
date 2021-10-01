@@ -60,20 +60,14 @@ function addUser(user){
     users['users_list'].push(user);
 }
 
-//function deleteUser(user){
-//    users['users_list'].slice(user);
-//}
-
 const deleteUser = (search) => {
     users['users_list'] = users['users_list'].filter( (m) => m['id'] !== search['id']);
-  
 }
 
 app.delete('/users/:id', (req, res) => {
     const userIdToDelete = req.params['id'];
     if (userIdToDelete != undefined){
         let result = findUserById(userIdToDelete);
-        //result = {users_list: result};
         deleteUser(result);
         res.send('Delete of ' + result['name'] + ' successful');
     }
