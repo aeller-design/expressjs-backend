@@ -54,13 +54,13 @@ app.get('/users', (req, res) => {
 
 app.post('/users', (req, res) => {
     const userToAdd = req.body;
-    addUser(userToAdd);
-    res.status(201).end();
+    res.status(201).send(addUser(userToAdd));
 });
 
 function addUser(user){
     user['id'] = getRandID();
     users['users_list'].push(user);
+    return user;
 }
 
 function getRandID(){
@@ -77,10 +77,10 @@ app.delete('/users/:id', (req, res) => {
     if (userIdToDelete != undefined){
         let result = findUserById(userIdToDelete);
         deleteUser(result);
-        res.send('Delete of ' + result['name'] + ' successful');
+        res.status(204).send('Successful delete');
     }
     else{
-        res.send('User ID Not found');
+        res.status(404).send('User not found');
     }
   });
 
