@@ -59,8 +59,14 @@ app.post('/users', (req, res) => {
 });
 
 function addUser(user){
+    user['id'] = getRandID();
     users['users_list'].push(user);
 }
+
+function getRandID(){
+    return String(Math.floor(Math.random() * 1000000));
+}
+
 
 const deleteUser = (search) => {
     users['users_list'] = users['users_list'].filter( (m) => m['id'] !== search['id']);
